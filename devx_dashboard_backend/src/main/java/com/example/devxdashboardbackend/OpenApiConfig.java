@@ -11,6 +11,9 @@ import org.springframework.context.annotation.Configuration;
 /**
  * OpenAPI configuration for the DevX Dashboard Backend service.
  * Provides metadata and server information for the API documentation.
+ * 
+ * Note: This service exposes ONLY Swagger/OpenAPI documentation endpoints.
+ * All functional business endpoints have been disabled.
  */
 @Configuration
 public class OpenApiConfig {
@@ -29,9 +32,13 @@ public class OpenApiConfig {
                 .info(new Info()
                         .title("DevX Dashboard Backend API")
                         .version("0.1.0")
-                        .description("REST API service exposing health check and API documentation endpoints only. " +
-                                "Application endpoints for ticket data processing are currently disabled. " +
-                                "This service provides: GET /health for health checks, and comprehensive API documentation via Swagger UI.")
+                        .description("API Documentation Service - This service exposes only Swagger/OpenAPI documentation endpoints. " +
+                                "All functional business endpoints (including health checks, data processing, and upload endpoints) are disabled. " +
+                                "Available documentation endpoints: " +
+                                "GET /swagger-ui.html (Swagger UI), " +
+                                "GET /v3/api-docs (OpenAPI JSON specification), " +
+                                "GET /v3/api-docs/swagger-config (Swagger configuration), " +
+                                "GET /swagger-ui/** (static assets).")
                         .contact(new Contact()
                                 .name("DevX Team")
                                 .email("support@example.com")))
