@@ -29,9 +29,9 @@ public class OpenApiConfig {
                 .info(new Info()
                         .title("DevX Dashboard Backend API")
                         .version("0.1.0")
-                        .description("REST API service for processing ticket data and computing metrics. " +
-                                "This service accepts Excel file uploads containing ticket data and returns " +
-                                "computed metrics including ticket counts, SLA adherence, MTTR, and remarks.")
+                        .description("REST API service exposing health check and API documentation endpoints only. " +
+                                "Application endpoints for ticket data processing are currently disabled. " +
+                                "This service provides: GET /health for health checks, and comprehensive API documentation via Swagger UI.")
                         .contact(new Contact()
                                 .name("DevX Team")
                                 .email("support@example.com")))
