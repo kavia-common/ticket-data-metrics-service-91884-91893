@@ -12,3 +12,9 @@
 
 See Swagger UI at /swagger-ui.html for interactive docs.
 OpenAPI JSON is available at /v3/api-docs (used by reverse proxies and clients).
+Additionally, /docs redirects to Swagger UI while preserving scheme/host/port behind proxies.
+
+Troubleshooting:
+- If /v3/api-docs returns 500, verify springdoc-openapi-starter-webmvc-ui version matches Spring Boot, and ensure annotations in controllers are minimal. This project relies on SpringDoc inference with @Operation(summary) to avoid complex schema issues.
+- Confirm application.properties sets: springdoc.api-docs.path=/v3/api-docs and springdoc.swagger-ui.path=/swagger-ui.html
+- Limit scanning via: springdoc.packages-to-scan=com.example.devxdashboardbackend

@@ -3,9 +3,7 @@ package com.example.devxdashboardbackend.controller;
 import com.example.devxdashboardbackend.model.TicketMetric;
 import com.example.devxdashboardbackend.service.TicketMetricsService;
 import io.swagger.v3.oas.annotations.Operation;
-import io.swagger.v3.oas.annotations.media.Content;
-import io.swagger.v3.oas.annotations.media.Schema;
-import io.swagger.v3.oas.annotations.responses.ApiResponse;
+
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -32,21 +30,7 @@ public class TicketUploadController {
     // PUBLIC_INTERFACE
     @PostMapping(value = "/upload", consumes = MediaType.MULTIPART_FORM_DATA_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     @Operation(
-            operationId = "uploadTicketExcel",
-            summary = "Upload tickets Excel file",
-            description = "Accepts a .xlsx file under form field 'file', validates and parses it, computes metrics, and returns a JSON array of metric objects.",
-            tags = {"Tickets"},
-            responses = {
-                    @ApiResponse(responseCode = "200", description = "Metrics computed successfully",
-                            content = @Content(
-                                    mediaType = "application/json",
-                                    schema = @Schema(implementation = TicketMetric[].class)
-                            )),
-                    @ApiResponse(responseCode = "400", description = "Validation error"),
-                    @ApiResponse(responseCode = "413", description = "File too large"),
-                    @ApiResponse(responseCode = "422", description = "Parsing error"),
-                    @ApiResponse(responseCode = "500", description = "Internal error")
-            }
+            summary = "Upload tickets Excel file"
     )
     public ResponseEntity<List<TicketMetric>> upload(
             @RequestPart("file") MultipartFile file

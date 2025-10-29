@@ -32,4 +32,5 @@ import org.springframework.context.annotation.Configuration;
 )
 public class OpenApiConfig {
     // Intentionally empty - annotations drive the OpenAPI meta.
+    // Keep minimal supported annotations to avoid classpath issues during OpenAPI generation.
 }
