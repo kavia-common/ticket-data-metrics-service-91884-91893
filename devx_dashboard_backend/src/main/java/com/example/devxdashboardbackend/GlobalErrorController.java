@@ -1,5 +1,6 @@
 package com.example.devxdashboardbackend;
 
+import io.swagger.v3.oas.annotations.Hidden;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.http.HttpServletRequest;
 import java.time.OffsetDateTime;
@@ -19,8 +20,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
  * Note: This only handles /error and will not intercept Swagger UI, OpenAPI
  * JSON, or their static assets (e.g., /swagger-ui.html, /v3/api-docs, /swagger-ui/**).
  * Those are served by SpringDoc and static resource handlers directly.
+ * This controller is hidden from OpenAPI documentation.
  */
 @org.springframework.web.bind.annotation.RestController
+@Hidden
 public class GlobalErrorController implements ErrorController {
 
     /**
