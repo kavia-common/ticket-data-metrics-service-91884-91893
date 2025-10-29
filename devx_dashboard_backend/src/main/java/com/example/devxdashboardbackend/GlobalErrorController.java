@@ -16,6 +16,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
  * PUBLIC_INTERFACE
  * Global error controller to provide JSON responses for all errors, including
  * unmapped paths (404), preventing the default Whitelabel error page.
+ * Note: This only handles /error and will not intercept Swagger UI, OpenAPI
+ * JSON, or their static assets (e.g., /swagger-ui.html, /v3/api-docs, /swagger-ui/**).
+ * Those are served by SpringDoc and static resource handlers directly.
  */
 @org.springframework.web.bind.annotation.RestController
 public class GlobalErrorController implements ErrorController {
