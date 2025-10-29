@@ -3,12 +3,8 @@ package com.example.devxdashboardbackend.controller;
 import com.example.devxdashboardbackend.model.TicketMetric;
 import com.example.devxdashboardbackend.service.TicketMetricsService;
 import io.swagger.v3.oas.annotations.Operation;
-import io.swagger.v3.oas.annotations.Parameter;
-import io.swagger.v3.oas.annotations.media.ArraySchema;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
-
-import io.swagger.v3.oas.annotations.parameters.RequestBody;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.MediaType;
@@ -40,41 +36,19 @@ public class TicketUploadController {
             summary = "Upload tickets Excel file",
             description = "Accepts a .xlsx file under form field 'file', validates and parses it, computes metrics, and returns a JSON array of metric objects.",
             tags = {"Tickets"},
-            requestBody = @RequestBody(
-                    required = true,
-                    content = @Content(
-                            mediaType = MediaType.MULTIPART_FORM_DATA_VALUE,
-                            schema = @Schema(
-                                    type = "object",
-                                    description = "Multipart form with a single file field named 'file'"
-                            )
-                    )
-            ),
             responses = {
                     @ApiResponse(responseCode = "200", description = "Metrics computed successfully",
                             content = @Content(
                                     mediaType = "application/json",
-                                    array = @ArraySchema(schema = @Schema(implementation = TicketMetric.class))
+                                    schema = @Schema(implementation = TicketMetric[].class)
                             )),
-                    @ApiResponse(responseCode = "400", description = "Validation error",
-                            content = @Content(mediaType = "application/json")),
-                    @ApiResponse(responseCode = "413", description = "File too large",
-                            content = @Content(mediaType = "application/json")),
-                    @ApiResponse(responseCode = "422", description = "Parsing error",
-                            content = @Content(mediaType = "application/json")),
-                    @ApiResponse(responseCode = "500", description = "Internal error",
-                            content = @Content(mediaType = "application/json"))
+                    @ApiResponse(responseCode = "400", description = "Validation error"),
+                    @ApiResponse(responseCode = "413", description = "File too large"),
+                    @ApiResponse(responseCode = "422", description = "Parsing error"),
+                    @ApiResponse(responseCode = "500", description = "Internal error")
             }
     )
     public ResponseEntity<List<TicketMetric>> upload(
-            @Parameter(
-                    description = "Excel .xlsx file",
-                    required = true,
-                    content = @Content(
-                            mediaType = MediaType.APPLICATION_OCTET_STREAM_VALUE,
-                            schema = @Schema(type = "string", format = "binary")
-                    )
-            )
             @RequestPart("file") MultipartFile file
     ) {
         List<TicketMetric> result = ticketMetricsService.processUpload(file);
