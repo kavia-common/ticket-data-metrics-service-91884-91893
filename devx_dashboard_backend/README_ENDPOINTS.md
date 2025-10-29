@@ -11,3 +11,4 @@
     - 500 Internal error
 
 See Swagger UI at /swagger-ui.html for interactive docs.
+OpenAPI JSON is available at /v3/api-docs (used by reverse proxies and clients).
